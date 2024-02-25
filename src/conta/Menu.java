@@ -16,9 +16,9 @@ public class Menu {
 
 		Scanner leia = new Scanner(System.in);
 
-		int opcao, numero, agencia, tipo, aniversario;
+		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
-		float saldo, limite;
+		float saldo, limite, valor;
 
 		while (true) {
 
@@ -145,6 +145,15 @@ public class Menu {
 				break;
 			case 6:
 				System.out.println("\n Sacar");
+				System.out.println("Digite o número da conta: ");
+				numero = leia.nextInt();
+				
+				do {
+					System.out.println("Digite o valor do Saque (R$): ");
+					valor = leia.nextInt();
+				} while(valor <= 0);
+				
+				contas.sacar(numero,  valor);
 
 				break;
 			case 7:
