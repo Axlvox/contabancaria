@@ -60,28 +60,29 @@ public class Menu {
 				titular = leia.nextLine();
 
 				do {
-		            System.out.println("Digite o número da Conta (1-CC ou 2-CP): ");
-		            tipo = leia.nextInt();
-		        } while (tipo < 1 && tipo > 2);
+					System.out.println("Digite o número da Conta (1-CC ou 2-CP): ");
+					tipo = leia.nextInt();
+				} while (tipo < 1 && tipo > 2);
 
-		        System.out.println("Digite o Saldo da Conta (R$): ");
-		        saldo = leia.nextFloat();
-		        switch (tipo) {
-		            case 1:
-		                System.out.println("Digite o Saldo de Crédito (R$): ");
-		                limite = leia.nextFloat();
-		                contas.cadastrar(new ContaCorrente(contas.generateNumber(), agencia, tipo, titular, saldo, limite));
-		                break;
-		            case 2:
-		                System.out.println("Digite o dia do Aniversário da Conta: ");
-		                aniversario = leia.nextInt();
-		                contas.cadastrar(new ContaPoupanca(contas.generateNumber(), agencia, tipo, titular, saldo, aniversario));
-		                break;
-		            default:
-		                System.out.println("Opção Inválida");
-		                break;
-		        }
-		        break;
+				System.out.println("Digite o Saldo da Conta (R$): ");
+				saldo = leia.nextFloat();
+				switch (tipo) {
+				case 1:
+					System.out.println("Digite o Saldo de Crédito (R$): ");
+					limite = leia.nextFloat();
+					contas.cadastrar(new ContaCorrente(contas.generateNumber(), agencia, tipo, titular, saldo, limite));
+					break;
+				case 2:
+					System.out.println("Digite o dia do Aniversário da Conta: ");
+					aniversario = leia.nextInt();
+					contas.cadastrar(
+							new ContaPoupanca(contas.generateNumber(), agencia, tipo, titular, saldo, aniversario));
+					break;
+				default:
+					System.out.println("Opção Inválida");
+					break;
+				}
+				break;
 			case 2:
 				System.out.println("\n Listar todas as Contas");
 				contas.listarTodas();
@@ -89,16 +90,51 @@ public class Menu {
 				break;
 			case 3:
 				System.out.println("\n Buscar Conta por Número");
-				System.out.println("Digite o número da conta: " );
+				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-				
+
 				contas.procurarPorNumero(numero);
 
 				break;
 			case 4:
-				System.out.println("\n Atualizar dados da Conta");
+			    System.out.println("\n Atualizar Dados da Conta: ");
+			    System.out.println("Digite o Número da Conta");
+			    numero = leia.nextInt();
 
-				break;
+			    var buscaConta = contas.buscarNaCollection(numero);
+
+			    if (buscaConta != null) {
+			        tipo = buscaConta.getType();
+
+			        System.out.println("\n Digite o número da Agência: ");
+			        agencia = leia.nextInt();
+			        System.out.println("\n Digite o Nome do Titular");
+			        leia.nextLine();
+			        titular = leia.nextLine();
+
+			        System.out.println("Digite o Saldo da Conta (R$): ");
+			        saldo = leia.nextFloat();
+
+			        switch (tipo) {
+			            case 1:
+			                System.out.println("Digite o Saldo de Crédito (R$): ");
+			                limite = leia.nextFloat();
+			                contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+			                break;
+			            case 2:
+			                System.out.println("Digite o dia do Aniversário da Conta: ");
+			                aniversario = leia.nextInt();
+			                contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
+			                break;
+			            default:
+			                System.out.println("Tipo de Conta Inválido");
+			                break;
+			        }
+			    } else {
+			        System.out.println("Conta não encontrada.");
+			    }
+			    break;
+
 			case 5:
 				System.out.println("\n Apagar Conta");
 
@@ -122,7 +158,6 @@ public class Menu {
 		}
 
 	}
-
 
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
