@@ -88,7 +88,11 @@ public class Menu {
 
 				break;
 			case 3:
-				System.out.println("\n Buscar Conta por número");
+				System.out.println("\n Buscar Conta por Número");
+				System.out.println("Digite o número da conta: " );
+				numero = leia.nextInt();
+				
+				contas.procurarPorNumero(numero);
 
 				break;
 			case 4:
