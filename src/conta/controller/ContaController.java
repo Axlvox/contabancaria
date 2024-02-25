@@ -5,6 +5,9 @@ import conta.model.Conta;
 import conta.repository.ContaRepository;
 
 public class ContaController implements ContaRepository {
+	
+	private ArrayList<Conta> listaContas = new ArrayList<Conta>();
+	int numero = 0;
 
 	@Override
 	public void procurarPorNumero(int numero) {
@@ -14,7 +17,9 @@ public class ContaController implements ContaRepository {
 
 	@Override
 	public void listarTodas() {
-		// TODO Auto-generated method stub
+		for (var conta : listaContas) {
+			conta.visualizar();
+		}
 		
 	}
 
