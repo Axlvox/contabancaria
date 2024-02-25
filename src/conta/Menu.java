@@ -11,24 +11,14 @@ public class Menu {
 	public static Scanner leia = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		
+
 		ContaController contas = new ContaController();
 
-		int opcao;
+		Scanner leia = new Scanner(System.in);
 
-//		ContaCorrente cc1 = new ContaCorrente(1, 123, 1, "José da Silva", 0.0f, 1000.0f);
-//		cc1.visualizar();
-//		cc1.sacar(12000.0f);
-//		cc1.visualizar();
-//		cc1.depositar(5000.0f);
-//		cc1.visualizar();
-//		
-//		ContaPoupanca cp1 = new ContaPoupanca(2, 123, 2, "Maria dos Santos", 100000.0f, 15);
-//		cp1.visualizar();
-//        cp1.sacar(1000.0f);
-//		cp1.visualizar();
-//		cp1.depositar(5000.0f);
-//		cp1.visualizar();
+		int opcao, numero, agencia, tipo, aniversario;
+		String titular;
+		float saldo, limite;
 
 		while (true) {
 
@@ -63,7 +53,35 @@ public class Menu {
 			case 1:
 				System.out.println("\n Criar Conta");
 
-				break;
+				System.out.println("\n Digite o número da Agência: ");
+				agencia = leia.nextInt();
+				System.out.println("\n Digite o Nome do Titular");
+				leia.nextLine();
+				titular = leia.nextLine();
+
+				do {
+		            System.out.println("Digite o número da Conta (1-CC ou 2-CP): ");
+		            tipo = leia.nextInt();
+		        } while (tipo < 1 && tipo > 2);
+
+		        System.out.println("Digite o Saldo da Conta (R$): ");
+		        saldo = leia.nextFloat();
+		        switch (tipo) {
+		            case 1:
+		                System.out.println("Digite o Saldo de Crédito (R$): ");
+		                limite = leia.nextFloat();
+		                contas.cadastrar(new ContaCorrente(contas.generateNumber(), agencia, tipo, titular, saldo, limite));
+		                break;
+		            case 2:
+		                System.out.println("Digite o dia do Aniversário da Conta: ");
+		                aniversario = leia.nextInt();
+		                contas.cadastrar(new ContaPoupanca(contas.generateNumber(), agencia, tipo, titular, saldo, aniversario));
+		                break;
+		            default:
+		                System.out.println("Opção Inválida");
+		                break;
+		        }
+		        break;
 			case 2:
 				System.out.println("\n Listar todas as Contas");
 				contas.listarTodas();
@@ -98,7 +116,9 @@ public class Menu {
 				break;
 			}
 		}
+
 	}
+
 
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
