@@ -158,6 +158,15 @@ public class Menu {
 				break;
 			case 7:
 				System.out.println("\n Depositar");
+				System.out.println("Digite o número da conta: ");
+				numero = leia.nextInt();
+				
+				do {
+					System.out.println("Digite o valor do Depósito (R$): ");
+					valor = leia.nextInt();
+				} while(valor <= 0);
+				
+				contas.depositar(numero,  valor);
 
 				break;
 			case 8:
