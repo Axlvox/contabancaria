@@ -137,6 +137,10 @@ public class Menu {
 
 			case 5:
 				System.out.println("\n Apagar Conta");
+				System.out.println("Digite o número da conta: ");
+				numero = leia.nextInt();
+				
+				contas.deletar(numero);
 
 				break;
 			case 6:
